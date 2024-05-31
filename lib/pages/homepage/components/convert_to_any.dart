@@ -22,7 +22,7 @@ class _ConvertToAnyState extends State<ConvertToAny> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.26,
+      height: MediaQuery.of(context).size.height * 0.28,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.10,
@@ -62,10 +62,10 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                 ],
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               SizedBox(
-                height: 35,
+                height: 40,
                 child: TextField(
                   controller: _controller,
                   keyboardType: TextInputType.number,
@@ -79,54 +79,66 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DropdownButton<String>(
-                      value: dropDownValue1,
-                      icon: const Icon(Icons.arrow_drop_down_rounded),
-                      items: widget.currency.keys
-                          .toSet()
-                          .toList()
-                          .map<DropdownMenuItem<String>>(
-                        (value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          dropDownValue1 = value!;
-                        });
-                      }),
-                  DropdownButton<String>(
-                      value: dropDownValue2,
-                      icon: const Icon(Icons.arrow_drop_down_rounded),
-                      items: widget.currency.keys
-                          .toSet()
-                          .toList()
-                          .map<DropdownMenuItem<String>>(
-                        (value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          dropDownValue2 = value!;
-                        });
-                      }),
+                  Expanded(
+                    child: DropdownButton<String>(
+                        underline: Container(
+                          height: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        value: dropDownValue1,
+                        icon: const Icon(Icons.arrow_drop_down_rounded),
+                        items: widget.currency.keys
+                            .toSet()
+                            .toList()
+                            .map<DropdownMenuItem<String>>(
+                          (value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            dropDownValue1 = value!;
+                          });
+                        }),
+                  ),
+                  const SizedBox(
+                    width: 50,
+                  ),
+                  Expanded(
+                    child: DropdownButton<String>(
+                        underline: Container(
+                          height: 1,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        value: dropDownValue2,
+                        icon: const Icon(Icons.arrow_drop_down_rounded),
+                        items: widget.currency.keys
+                            .toSet()
+                            .toList()
+                            .map<DropdownMenuItem<String>>(
+                          (value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            dropDownValue2 = value!;
+                          });
+                        }),
+                  ),
                 ],
               ),
               const SizedBox(
-                height: 3,
+                height: 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +151,7 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                       });
                     },
                     child: Container(
-                      height: 30,
+                      height: 35,
                       width: 100,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -160,8 +172,8 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                     ),
                   ),
                   Container(
-                    height: 30,
-                    width: 100,
+                    height: 35,
+                    width: 120,
                     decoration: BoxDecoration(
                         color: Colors.pink[100],
                         borderRadius: BorderRadius.circular(25)),

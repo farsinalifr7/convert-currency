@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey[100],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(19),
+        padding: const EdgeInsets.only(right: 19, left: 19, top: 5),
         child: FutureBuilder<RateModel>(
             future: result,
             builder: (context, snapshot) {
@@ -95,39 +95,46 @@ class _HomePageState extends State<HomePage> {
                             AlwaysStoppedAnimation<Color>(Colors.deepPurple),
                       ));
                     }
-                    return Column(
-                      children: [
-                        UsdToAny(
-                          rate: snapshot.data!.rates,
-                          currency: currsnapshot.data!,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ConvertToAny(
-                          rate: snapshot.data!.rates,
-                          currency: currsnapshot.data!,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Currency",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey[800]),
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          UsdToAny(
+                            rate: snapshot.data!.rates,
+                            currency: currsnapshot.data!,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          ConvertToAny(
+                            rate: snapshot.data!.rates,
+                            currency: currsnapshot.data!,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Currency",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey[800]),
+                              ),
+                              const Text(
+                                "See all",
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          Container(
+                            height: 170,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              //color: Colors.white,
                             ),
-                            const Text(
-                              "See all",
-                              style: TextStyle(color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        Expanded(
                             child: ListView.builder(
                                 itemCount: 10,
                                 itemBuilder: (context, index) {
@@ -158,8 +165,10 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   );
-                                }))
-                      ],
+                                }),
+                          )
+                        ],
+                      ),
                     );
                   });
             }),

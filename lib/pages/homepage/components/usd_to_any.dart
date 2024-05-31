@@ -22,7 +22,7 @@ class _UsdToAnyState extends State<UsdToAny> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.26,
+      height: MediaQuery.of(context).size.height * 0.28,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.10,
@@ -62,10 +62,10 @@ class _UsdToAnyState extends State<UsdToAny> {
                 ],
               ),
               const SizedBox(
-                height: 3,
+                height: 10,
               ),
               SizedBox(
-                height: 35,
+                height: 40,
                 child: TextField(
                   controller: _controller,
                   keyboardType: TextInputType.number,
@@ -79,31 +79,34 @@ class _UsdToAnyState extends State<UsdToAny> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DropdownButton<String>(
-                      value: dropDownValue,
-                      icon: const Icon(Icons.arrow_drop_down_rounded),
-                      items: widget.currency.keys
-                          .toSet()
-                          .toList()
-                          .map<DropdownMenuItem<String>>(
-                        (value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          dropDownValue = value!;
-                        });
-                      }),
+                  Expanded(
+                    child: DropdownButton<String>(
+                        underline: Container(
+                          height: 1,
+                          color: Colors.black.withOpacity(0.3),
+                        ),
+                        value: dropDownValue,
+                        icon: const Icon(Icons.arrow_drop_down_rounded),
+                        items: widget.currency.keys
+                            .toSet()
+                            .toList()
+                            .map<DropdownMenuItem<String>>(
+                          (value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            dropDownValue = value!;
+                          });
+                        }),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -120,7 +123,7 @@ class _UsdToAnyState extends State<UsdToAny> {
                       });
                     },
                     child: Container(
-                      height: 30,
+                      height: 33,
                       width: 100,
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -141,11 +144,11 @@ class _UsdToAnyState extends State<UsdToAny> {
                     ),
                   ),
                   Container(
-                    height: 30,
-                    width: 100,
+                    height: 33,
+                    width: 120,
                     decoration: BoxDecoration(
                         color: Colors.green[100],
-                        borderRadius: BorderRadius.circular(25)),
+                        borderRadius: BorderRadius.circular(18)),
                     child: Center(
                         child: Text(
                       answer,

@@ -39,9 +39,6 @@ class _HomePageState extends State<HomePage> {
       Colors.pink,
       Colors.red,
       Colors.amber,
-      Colors.deepOrange,
-      Colors.green,
-      Colors.lightBlue,
     ];
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -118,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Currency",
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.grey[800]),
                               ),
@@ -135,37 +132,59 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(8),
                               //color: Colors.white,
                             ),
-                            child: ListView.builder(
-                                itemCount: 10,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Container(
-                                      height: 75,
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Colors.white,
+                            child: FutureBuilder(
+                                future: allCurrencies,
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Colors.deepPurple),
                                       ),
-                                      child: ListTile(
-                                        leading: CircleAvatar(
-                                          radius: 27,
-                                          backgroundColor: colors[index],
-                                          child: const Text(
-                                            "AF",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 22),
+                                    );
+                                  }
+                                  return ListView.builder(
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8),
+                                          child: Container(
+                                            height: 75,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.white,
+                                            ),
+                                            child: ListTile(
+                                              leading: CircleAvatar(
+                                                radius: 27,
+                                                backgroundColor: index > 9
+                                                    ? colors[index % 10]
+                                                    : colors[index],
+                                                child: const Text(
+                                                  "AF",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 22),
+                                                ),
+                                              ),
+                                              title: const Text("index"),
+                                              subtitle: const Text("subtitle"),
+                                            ),
                                           ),
-                                        ),
-                                        title: const Text("index"),
-                                        subtitle: const Text("subtitle"),
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                        );
+                                      });
+                                }
+                                //
+                                ),
                           )
                         ],
                       ),

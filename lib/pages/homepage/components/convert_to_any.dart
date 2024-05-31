@@ -13,7 +13,7 @@ class ConvertToAny extends StatefulWidget {
 
 class _ConvertToAnyState extends State<ConvertToAny> {
   final TextEditingController _controller = TextEditingController();
-  String finalResult = "";
+  String finalResult = "0.00";
   String dropDownValue1 = "AUD";
   String dropDownValue2 = "AUD";
   @override
@@ -177,12 +177,23 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                     decoration: BoxDecoration(
                         color: Colors.pink[100],
                         borderRadius: BorderRadius.circular(25)),
-                    child: Center(
-                        child: Text(
-                      finalResult,
-                      style: TextStyle(
-                          color: Colors.pink[800], fontWeight: FontWeight.w600),
-                    )),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "$dropDownValue2: ",
+                          style: TextStyle(
+                              color: Colors.pink[800],
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          finalResult,
+                          style: TextStyle(
+                              color: Colors.pink[800],
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )

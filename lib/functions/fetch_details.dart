@@ -21,16 +21,11 @@ Future<Map> fetchCurrency() async {
 }
 
 String convertUSD(Map exchangeRate, String currency, String usd) {
-  print(exchangeRate);
-  print(currency);
-  print(usd);
-  //print(exchangeRate[currency]);
+  String result =
+      ((exchangeRate[usd] * double.parse(currency)).toStringAsFixed(2))
+          .toString();
+  print(result);
 
-  String result = ((double.parse(exchangeRate[currency]) * double.parse(usd))
-          .toStringAsFixed(2))
-      .toString();
-  //print(result);
-  //return "1231";
   return result;
 }
 

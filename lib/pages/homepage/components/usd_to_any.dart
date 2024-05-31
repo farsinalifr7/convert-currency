@@ -13,7 +13,7 @@ class UsdToAny extends StatefulWidget {
 }
 
 class _UsdToAnyState extends State<UsdToAny> {
-  String answer = "";
+  String answer = "0.00";
   String dropDownValue = "AUD";
   final TextEditingController _controller = TextEditingController();
   @override
@@ -151,7 +151,7 @@ class _UsdToAnyState extends State<UsdToAny> {
                         borderRadius: BorderRadius.circular(18)),
                     child: Center(
                         child: Text(
-                      answer,
+                      "$dropDownValue :$answer",
                       style: TextStyle(
                           color: Colors.green[800],
                           fontWeight: FontWeight.w600),

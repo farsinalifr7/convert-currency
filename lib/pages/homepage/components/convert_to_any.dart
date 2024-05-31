@@ -12,8 +12,16 @@ class ConvertToAny extends StatefulWidget {
 }
 
 class _ConvertToAnyState extends State<ConvertToAny> {
+  @override
+  void dispose() {
+    _controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   final TextEditingController _controller = TextEditingController();
   String finalResult = "0.00";
+  String finalString = "";
   String dropDownValue1 = "AUD";
   String dropDownValue2 = "AUD";
   @override
@@ -22,7 +30,7 @@ class _ConvertToAnyState extends State<ConvertToAny> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.28,
+      height: MediaQuery.of(context).size.height * 0.31,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.10,
@@ -148,6 +156,9 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                       setState(() {
                         finalResult = convertAny(widget.rate, _controller.text,
                             dropDownValue1, dropDownValue2);
+
+                        finalString =
+                            "${_controller.text} $dropDownValue1 = $finalResult $dropDownValue2";
                       });
                     },
                     child: Container(
@@ -196,7 +207,17 @@ class _ConvertToAnyState extends State<ConvertToAny> {
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    finalString,
+                    style: const TextStyle(
+                        color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                  )),
             ],
           ),
         ),

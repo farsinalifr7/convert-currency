@@ -13,6 +13,14 @@ class UsdToAny extends StatefulWidget {
 }
 
 class _UsdToAnyState extends State<UsdToAny> {
+  @override
+  void dispose() {
+    _controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  String finalString = "";
   String answer = "0.00";
   String dropDownValue = "AUD";
   final TextEditingController _controller = TextEditingController();
@@ -22,7 +30,7 @@ class _UsdToAnyState extends State<UsdToAny> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15), color: Colors.white),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.28,
+      height: MediaQuery.of(context).size.height * 0.31,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.10,
@@ -120,6 +128,9 @@ class _UsdToAnyState extends State<UsdToAny> {
                       setState(() {
                         answer = convertUSD(
                             widget.rate, _controller.text, dropDownValue);
+
+                        finalString =
+                            "${_controller.text} USD = $answer $dropDownValue";
                       });
                     },
                     child: Container(
@@ -158,7 +169,17 @@ class _UsdToAnyState extends State<UsdToAny> {
                     )),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    finalString,
+                    style: const TextStyle(
+                        color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                  ))
             ],
           ),
         ),

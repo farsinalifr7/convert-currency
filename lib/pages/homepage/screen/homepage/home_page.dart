@@ -163,21 +163,28 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             child: ListTile(
                                               leading: CircleAvatar(
-                                                radius: 27,
+                                                radius: 26,
                                                 backgroundColor: index > 9
                                                     ? colors[index % 10]
                                                     : colors[index],
-                                                child: const Text(
-                                                  "AF",
-                                                  style: TextStyle(
+                                                child: Text(
+                                                  snapshot.data!.keys
+                                                      .toList()[index]
+                                                      .toString(),
+                                                  style: const TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 22),
+                                                          FontWeight.w600,
+                                                      fontSize: 18),
                                                 ),
                                               ),
-                                              title: const Text("index"),
-                                              subtitle: const Text("subtitle"),
+                                              title: Text(snapshot.data!.keys
+                                                  .toList()[index]
+                                                  .toString()),
+                                              subtitle: Text(snapshot
+                                                  .data!.values
+                                                  .toList()[index]
+                                                  .toString()),
                                             ),
                                           ),
                                         );

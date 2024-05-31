@@ -133,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                               //color: Colors.white,
                             ),
                             child: FutureBuilder(
-                                future: allCurrencies,
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
+                                future: result,
+                                builder: (context, snapshot1) {
+                                  if (snapshot1.connectionState ==
                                       ConnectionState.waiting) {
                                     return const Center(
                                       child: CircularProgressIndicator(
@@ -145,53 +145,86 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     );
                                   }
-                                  return ListView.builder(
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 8),
-                                          child: Container(
-                                            height: 75,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: Colors.white,
+                                  return FutureBuilder(
+                                      future: allCurrencies,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return const Center(
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.deepPurple),
                                             ),
-                                            child: ListTile(
-                                              leading: CircleAvatar(
-                                                radius: 26,
-                                                backgroundColor: index > 9
-                                                    ? colors[index % 10]
-                                                    : colors[index],
-                                                child: Text(
-                                                  snapshot.data!.keys
-                                                      .toList()[index]
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 18),
+                                          );
+                                        }
+                                        return ListView.builder(
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8),
+                                                child: Container(
+                                                  height: 75,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    color: Colors.white,
+                                                  ),
+                                                  child: ListTile(
+                                                    leading: CircleAvatar(
+                                                      radius: 26,
+                                                      backgroundColor: index > 9
+                                                          ? colors[index % 10]
+                                                          : colors[index],
+                                                      child: Text(
+                                                        snapshot.data!.keys
+                                                            .toList()[index]
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 18),
+                                                      ),
+                                                    ),
+                                                    title: Text(
+                                                      snapshot.data!.values
+                                                          .toList()[index]
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 15),
+                                                    ),
+                                                    subtitle: Text(
+                                                      snapshot1
+                                                          .data!
+                                                          .rates[snapshot
+                                                              .data!.keys
+                                                              .toList()[index]
+                                                              .toString()]!
+                                                          .toStringAsFixed(2)
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          color: Colors.grey,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                              title: Text(snapshot.data!.keys
-                                                  .toList()[index]
-                                                  .toString()),
-                                              subtitle: Text(snapshot
-                                                  .data!.values
-                                                  .toList()[index]
-                                                  .toString()),
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                }
-                                //
-                                ),
+                                              );
+                                            });
+                                      }
+                                      //
+                                      );
+                                }),
                           )
                         ],
                       ),

@@ -97,11 +97,17 @@ class _HomePageState extends State<HomePage> {
                     }
                     return Column(
                       children: [
-                        const UsdToAny(),
+                        UsdToAny(
+                          rate: snapshot.data!.rates,
+                          currency: currsnapshot.data!,
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        const ConvertToAny(),
+                        ConvertToAny(
+                          rate: snapshot.data!.rates,
+                          currency: currsnapshot.data!,
+                        ),
                         const SizedBox(
                           height: 20,
                         ),

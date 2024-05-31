@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:studentmodelhive/functions/fetch_details.dart';
 
-class UsdToAny extends StatelessWidget {
-  const UsdToAny({super.key});
+class UsdToAny extends StatefulWidget {
+  final rate;
+  final Map currency;
 
+  const UsdToAny({super.key, required this.rate, required this.currency});
+
+  @override
+  State<UsdToAny> createState() => _UsdToAnyState();
+}
+
+class _UsdToAnyState extends State<UsdToAny> {
+  String answer = "";
+  String dropDownValue = "AUD";
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +50,7 @@ class UsdToAny extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(10),
                     child: Text("USD to any currency",
                         style: GoogleFonts.aleo(
                           textStyle: TextStyle(
@@ -50,11 +62,13 @@ class UsdToAny extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 5,
+                height: 3,
               ),
               SizedBox(
-                height: 40,
+                height: 35,
                 child: TextField(
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -71,20 +85,25 @@ class UsdToAny extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Convert any to any",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[700]),
-                  ),
-                  Text(
-                    "Convert any to any",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[700]),
-                  ),
+                  DropdownButton<String>(
+                      value: dropDownValue,
+                      icon: const Icon(Icons.arrow_drop_down_rounded),
+                      items: widget.currency.keys
+                          .toSet()
+                          .toList()
+                          .map<DropdownMenuItem<String>>(
+                        (value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          dropDownValue = value!;
+                        });
+                      }),
                 ],
               ),
               const SizedBox(
@@ -93,16 +112,43 @@ class UsdToAny extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(""),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        answer = convertUSD(
+                            widget.rate, _controller.text, dropDownValue);
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                        //color: Colors.green[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Convert",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey[700]),
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
-                    height: 28,
+                    height: 30,
                     width: 100,
                     decoration: BoxDecoration(
                         color: Colors.green[100],
                         borderRadius: BorderRadius.circular(25)),
                     child: Center(
                         child: Text(
-                      "323",
+                      answer,
                       style: TextStyle(
                           color: Colors.green[800],
                           fontWeight: FontWeight.w600),

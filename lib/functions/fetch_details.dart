@@ -19,3 +19,28 @@ Future<Map> fetchCurrency() async {
   //print(result);
   return result;
 }
+
+String convertUSD(Map exchangeRate, String currency, String usd) {
+  print(exchangeRate);
+  print(currency);
+  print(usd);
+  //print(exchangeRate[currency]);
+
+  String result = ((double.parse(exchangeRate[currency]) * double.parse(usd))
+          .toStringAsFixed(2))
+      .toString();
+  //print(result);
+  //return "1231";
+  return result;
+}
+
+String convertAny(Map exchangeRate, String amount, String CurrencyBase,
+    String CurrencyFinal) {
+  String result = (double.parse(amount) /
+          exchangeRate[CurrencyBase] *
+          exchangeRate[CurrencyFinal])
+      .toStringAsFixed(2)
+      .toString();
+
+  return result;
+}
